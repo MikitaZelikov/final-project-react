@@ -1,9 +1,24 @@
 import './container.scss';
-import '../Movie/Movie';
+import Movie from '../Movie/Movie';
 
 function Container() {
   return (
     <div className="container">
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
+      <Movie />
       <Movie />
       <Movie />
       <Movie />

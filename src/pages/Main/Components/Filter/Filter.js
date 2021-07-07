@@ -1,4 +1,5 @@
 import './filter.scss';
+import addBtn from '../../../../assets/icon/add.svg';
 
 function Filter() {
   return (
@@ -27,7 +28,7 @@ function Filter() {
         </select>
       </form>
       <a className="add-movie-link" href="#">
-        <img src="/src/assets/icon/add.svg" alt="кнопка добавления фильма" />
+        <img src={addBtn} alt="кнопка добавления фильма" />
       </a>
     </div>
   );
