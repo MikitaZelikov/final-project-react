@@ -4,19 +4,19 @@ import { Provider } from 'react-redux';
 import './normalize.scss';
 import './index.scss';
 import store from './store/configStore';
-
+import Main from './pages/Main/Components/Main/Main';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Main/>
-      <Details/>
-      <Add/>
-      <Edit/>
-      <Sign-In/>
-      <Sign-Up/>
-      <Not-Found/>
+      <Main />
+      <Details />
+      <Add />
+      <Edit />
+      <Sign-In />
+      <Sign-Up />
+      <Not-Found />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

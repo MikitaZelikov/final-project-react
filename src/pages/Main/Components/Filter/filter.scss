@@ -1,0 +1,20 @@
+.sort-box {
+  display: flex;
+  column-gap: 2em;
+}
+
+.add-movie-link {
+  display: none;
+
+  & img {
+    width: 23px;
+
+    &:hover {
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    &:active {
+      background-color: #f0b3b3;
+    }
+  }
+}
