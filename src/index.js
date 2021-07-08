@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import './normalize.scss';
 import './index.scss';
-// import store from './store/configStore';
+import store from './store/configStore';
 import Main from './pages/Main/Components/Main/Main';
 // import Details from './pages/Details/Components/Details';
 // import Add from './pages/Add/Components/Add';
@@ -14,15 +14,15 @@ import Main from './pages/Main/Components/Main/Main';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider> */}
-    <Main />
-    {/* <Details />
-    <Add />
-    <Edit />
-    <SignIn />
-    <SignUp />
-    <NotFound /> */}
-    {/* </Provider> */}
+    <Provider store={store}>
+      <Main />
+      {/* <Details />
+      <Add />
+      <Edit />
+      <SignIn />
+      <SignUp />
+      <NotFound /> */}
+    </Provider>
   </React.StrictMode >,
   document.getElementById('root'),
 );

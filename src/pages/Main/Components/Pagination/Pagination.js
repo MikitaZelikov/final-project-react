@@ -1,8 +1,17 @@
 import './pagination.scss';
+import { useDispatch } from 'react-redux';
+import { setPage } from '../../../../store/reducers/pagesReducer';
 
 function Pagination() {
+  const dispatch = useDispatch();
+
+  const handleClickPage = ({ target }) => {
+    const page = target.textContent;
+    dispatch(setPage(page));
+  };
+
   return (
-    <ul className="pagination">
+    <ul className="pagination" onClick={handleClickPage}>
       <li className="pagination__element-nav">
         <a className="pagination__link" href="#">first</a>
       </li>
