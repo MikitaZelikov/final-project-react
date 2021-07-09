@@ -7,7 +7,7 @@ import Movie from '../Movie/Movie';
 import Loader from '../Loader/Loader';
 
 const getMovies = (state) => state.moviesData.data;
-const getCurrentPage = (state) => state.currentPage.page;
+const getCurrentPage = (state) => state.moviesData.page;
 
 function Container() {
   const dispatch = useDispatch();
@@ -17,7 +17,6 @@ function Container() {
   }, [dispatch]);
 
   const page = useSelector(getCurrentPage);
-  // debugger;
   const movies = useSelector(getMovies);
 
   return (

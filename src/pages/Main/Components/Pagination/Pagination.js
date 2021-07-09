@@ -1,13 +1,29 @@
 import './pagination.scss';
-import { useDispatch } from 'react-redux';
-import { setPage } from '../../../../store/reducers/pagesReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadMovies } from '../../../../store/reducers/moviesReducer';
+
+import PageBtn from '../Page-Btn/Page-Btn';
+import getVirtualPage from './paginator-function';
+
+const getPrevPage = (state) => state.moviesData.page;
 
 function Pagination() {
   const dispatch = useDispatch();
 
+  const statePage = useSelector(getPrevPage);
+
+  let startPage = 1;
+  if (statePage > 5) startPage = 6;
+  const finishPage = startPage + 5;
+  const visiblePages = [];
+  for (startPage; startPage < finishPage; startPage++) {
+    visiblePages.push(startPage);
+  }
+
   const handleClickPage = ({ target }) => {
-    const page = target.textContent;
-    dispatch(setPage(page));
+    const activePage = target.textContent;
+    const virtualPage = getVirtualPage(activePage, statePage);
+    dispatch(loadMovies(virtualPage));
   };
 
   return (
@@ -18,36 +34,15 @@ function Pagination() {
       <li className="pagination__element-nav">
         <a className="pagination__link" href="#">prev</a>
       </li>
-      <li className="pagination__element pagination__element--focus">
-        <a className="pagination__link" href="#" data-page-id="1">1</a>
-      </li>
-      <li className="pagination__element">
-        <a className="pagination__link" href="#" data-page-id="2">2</a>
-      </li>
-      <li className="pagination__element">
-        <a className="pagination__link" href="#" data-page-id="3">3</a>
-      </li>
-      <li className="pagination__element">
-        <a className="pagination__link" href="#" data-page-id="4">4</a>
-      </li>
-      <li className="pagination__element">
-        <a className="pagination__link" href="#" data-page-id="5">5</a>
-      </li>
-      <li className="pagination__element pagination__element--hidden">
-        <a className="pagination__link" href="#" data-page-id="6">6</a>
-      </li>
-      <li className="pagination__element pagination__element--hidden">
-        <a className="pagination__link" href="#" data-page-id="7">7</a>
-      </li>
-      <li className="pagination__element pagination__element--hidden">
-        <a className="pagination__link" href="#" data-page-id="8">8</a>
-      </li>
-      <li className="pagination__element pagination__element--hidden">
-        <a className="pagination__link" href="#" data-page-id="9">9</a>
-      </li>
-      <li className="pagination__element pagination__element--hidden">
-        <a className="pagination__link" href="#" data-page-id="10">10</a>
-      </li>
+      {
+        visiblePages.map((page, index) => (
+          <PageBtn
+            key={index}
+            currentPage={page}
+            focusPage={statePage}
+          />
+        ))
+      }
       <li className="pagination__element-nav">
         <a className="pagination__link" href="#">next</a>
       </li>

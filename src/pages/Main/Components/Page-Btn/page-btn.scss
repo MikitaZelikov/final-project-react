@@ -1,0 +1,16 @@
+.pagination__element {
+  border: solid 1px #000000;
+  border-radius: 5px;
+
+  &--focus {
+    background-color: #9bdaf3;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.pagination__link {
+  display: block;
+  padding: 0.5em;
+  text-decoration: none;
+  color: black;
+}

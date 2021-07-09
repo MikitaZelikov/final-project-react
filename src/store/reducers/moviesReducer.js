@@ -1,25 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as galleryApi from '../gallery-api';
+import * as galleryApi from '../../api/gallery-api';
 
 const initialState = {
   isLoading: false,
   data: {},
-  // page: '1',
+  page: 1,
 };
 
 export const loadMovies = createAsyncThunk(
   'movies/getMovies',
-  (page) => galleryApi.discoverMovies()); // экспорт в Container.js
+  async (page) => {
+    const moviesResponse = await galleryApi.discoverMovies(page);
+    return { moviesRes: moviesResponse, page };
+  },
+); // экспорт в Container.js
 
 export const moviesSlice = createSlice({
   name: 'movies',
   initialState,
-  // reducers: {
-  //   setPage: (state, action) => {
-  //     const initState = state;
-  //     initState.page = action.payload;
-  //   },
-  // },
   extraReducers: (builder) => {
     builder
       .addCase(loadMovies.pending, (state) => {
@@ -29,10 +27,10 @@ export const moviesSlice = createSlice({
       .addCase(loadMovies.fulfilled, (state, action) => {
         const initState = state;
         initState.isLoading = false;
-        initState.data = action.payload;
+        initState.data = action.payload.moviesRes;
+        initState.page = action.payload.page;
       });
   },
 });
 
 export default moviesSlice.reducer; // экспорт в configStore
-// export const { setPage } = moviesSlice.actions; // экспорт в Pagination.js
