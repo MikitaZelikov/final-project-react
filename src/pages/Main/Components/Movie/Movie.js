@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './movie.scss';
 import logoMovie from '../../../../assets/icon/logoMovie.jpg';
 import deleteBtn from '../../../../assets/icon/delete.svg';
@@ -7,8 +8,9 @@ function Movie(props) {
     poster_path: posterPath,
     release_date: releaseDate,
     title,
+    id,
     vote_average: voteAverage,
-    // ...rest,
+    // ...rest
   } = props;
 
   let urlPosterMovie = logoMovie;
@@ -17,11 +19,11 @@ function Movie(props) {
   return (
     <div className="container__element">
       <p className="container-element__text"><strong>{title}</strong></p>
-      <a href="#" className="container-element__link">
+      <Link to={`/details/${id}`} className="container-element__link">
         <img
           src={urlPosterMovie}
-          alt="фото кинопленки" />
-      </a>
+          alt="постер фильма" />
+      </Link>
       <p className="container-element__text container-element__text--hover">
         Рейтинг: <strong>{voteAverage}</strong>
       </p>

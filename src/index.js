@@ -1,28 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import './normalize.scss';
+import { BrowserRouter } from 'react-router-dom';
+
 import './index.scss';
-import store from './store/configStore';
-import Main from './pages/Main/Components/Main/Main';
-// import Details from './pages/Details/Components/Details';
-// import Add from './pages/Add/Components/Add';
-// import Edit from './pages/Edit/Components/Edit';
-// import SignIn from './pages/Sign-In/Components/Sign-In';
-// import SignUp from './pages/Sign-Up/Components/Sign-Up';
-// import NotFound from './pages/Not-Found/Components/Not-Found';
+import Routers from './routers/Routers';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Main />
-      {/* <Details />
-      <Add />
-      <Edit />
-      <SignIn />
-      <SignUp />
-      <NotFound /> */}
-    </Provider>
+    <BrowserRouter>
+      <Routers />
+    </ BrowserRouter>
   </React.StrictMode >,
   document.getElementById('root'),
 );

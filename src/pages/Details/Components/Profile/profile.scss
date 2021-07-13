@@ -1,0 +1,68 @@
+figure {
+  margin-inline: 0;
+  margin-block: 0;
+}
+
+.details-container {
+  display: flex;
+  column-gap: 2vw;
+}
+
+.poster-box {
+  min-width: 342px;
+
+  &__form-vote {
+    text-align: end;
+    display: none;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.description-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  &__vote-average,
+  &__genres {
+    font-weight: 700;
+  }
+}
+
+.edit-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: 25px;
+  display: none;
+
+  &__icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  &__correction:hover {
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+  }
+
+  &__correction:active {
+    background-color: #f0b3b3;
+  }
+
+  &__delete:hover {
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+  }
+
+  &__delete:active {
+    background-color: #f0b3b3;
+  }
+}

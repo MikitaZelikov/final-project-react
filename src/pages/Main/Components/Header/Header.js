@@ -1,5 +1,6 @@
 import './header.scss';
 import homepageBtn from '../../../../assets/icon/homepage.svg';
+// import { useEffect } from 'react';
 
 function Header() {
   return (
