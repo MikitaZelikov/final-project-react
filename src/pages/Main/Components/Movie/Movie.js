@@ -10,7 +10,6 @@ function Movie(props) {
     title,
     id,
     vote_average: voteAverage,
-    // ...rest
   } = props;
 
   let urlPosterMovie = logoMovie;

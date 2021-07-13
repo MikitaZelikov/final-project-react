@@ -1,12 +1,11 @@
 const apiKey = 'b1fec506f718f740d5503bd4b1c1c393';
-const sortBy = null;
 
 /**
  * @param {number} page Page number
  * @param {string} sortBy Possible value: 'none', 'release_date.asc', 'release_date.desc',
  *  'vote_average.asc', 'vote_average.desc'
 */
-export async function discoverMovies(page) {
+export async function discoverMovies(page, sortBy) {
   let url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=ru-RU&include_adult=false&include_video=false&page=${page}`;
   if (sortBy) {
     url += `&sort_by=${sortBy}`;

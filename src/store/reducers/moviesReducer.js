@@ -5,13 +5,14 @@ const initialState = {
   isLoading: false,
   data: {},
   page: 1,
+  sortBy: null,
 };
 
 export const loadMovies = createAsyncThunk(
   'movies/getMovies',
-  async (page) => {
-    const moviesResponse = await galleryApi.discoverMovies(page);
-    return { moviesRes: moviesResponse, page };
+  async ({ page, sortBy }) => {
+    const moviesResponse = await galleryApi.discoverMovies(page, sortBy);
+    return { moviesRes: moviesResponse, page, sortBy };
   },
 ); // экспорт в Container.js
 
@@ -29,6 +30,7 @@ export const moviesSlice = createSlice({
         initState.isLoading = false;
         initState.data = action.payload.moviesRes;
         initState.page = action.payload.page;
+        initState.sortBy = action.payload.sortBy;
       });
   },
 });

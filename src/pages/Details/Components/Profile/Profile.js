@@ -1,4 +1,5 @@
 import './profile.scss';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import iconDel from '../../../../assets/icon/delete.svg';
 import * as galleryApi from '../../../../api/gallery-api';
 
 function Profile() {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const [movie, setObjMovie] = useState({ data: {}, posterPath: '', movieGenres: '' });
 
@@ -20,7 +22,7 @@ function Profile() {
       posterPath,
       movieGenres,
     });
-  });
+  }, [dispatch]);
 
   return movie ? (
     <figure className="details-container">

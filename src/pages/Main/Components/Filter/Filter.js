@@ -1,12 +1,34 @@
 import './filter.scss';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadMovies } from '../../../../store/reducers/moviesReducer';
 import addBtn from '../../../../assets/icon/add.svg';
 
+const getCurrentPage = (state) => state.moviesData.page;
+
 function Filter() {
+  const [activeFilterEl, setActiveFilterEl] = useState('none');
+  const dispatch = useDispatch();
+  const page = useSelector(getCurrentPage);
+
+  const handleChange = ({ target }) => {
+    const sortBy = target.value;
+    setActiveFilterEl(sortBy);
+    dispatch(loadMovies({ page, sortBy }));
+  };
+
   return (
     <div className="sort-box">
       <form className="sort-form" action="">
-        <select className="sort-form__select" name="sort-select" id="sort-select">
-          <option className="sort-form__item sort-form__item--none" value="">none</option>
+        <select
+          className="sort-form__select"
+          name="sort-select"
+          id="sort-select"
+          value={activeFilterEl}
+          onChange={handleChange}>
+          <option className="sort-form__item sort-form__item--none" value="none">
+            none
+          </option>
           <option className="sort-form__item sort-form__item--rating-asc" value="vote_average.asc">
             rating asc
           </option>

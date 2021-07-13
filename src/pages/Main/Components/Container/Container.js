@@ -8,16 +8,18 @@ import Loader from '../Loader/Loader';
 
 const getMovies = (state) => state.moviesData.data;
 const getCurrentPage = (state) => state.moviesData.page;
+const getSortBy = (state) => state.moviesData.sortBy;
 
 function Container() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadMovies(page));
+    dispatch(loadMovies({ page, sortBy }));
   }, [dispatch]);
 
   const page = useSelector(getCurrentPage);
   const movies = useSelector(getMovies);
+  const sortBy = useSelector(getSortBy);
 
   return (
     <div className="container">

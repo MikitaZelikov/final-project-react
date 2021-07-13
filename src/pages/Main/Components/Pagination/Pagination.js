@@ -6,11 +6,13 @@ import PageBtn from '../Page-Btn/Page-Btn';
 import getVirtualPage from './paginator-function';
 
 const getPrevPage = (state) => state.moviesData.page;
+const getSortBy = (state) => state.moviesData.sortBy;
 
 function Pagination() {
   const dispatch = useDispatch();
 
   const statePage = useSelector(getPrevPage);
+  const sortBy = useSelector(getSortBy);
 
   let startPage = 1;
   if (statePage > 5) startPage = 6;
@@ -22,8 +24,8 @@ function Pagination() {
 
   const handleClickPage = ({ target }) => {
     const activePage = target.textContent;
-    const virtualPage = getVirtualPage(activePage, statePage);
-    dispatch(loadMovies(virtualPage));
+    const page = getVirtualPage(activePage, statePage);
+    dispatch(loadMovies({ page, sortBy }));
   };
 
   return (
