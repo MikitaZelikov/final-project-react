@@ -1,6 +1,7 @@
 import './pagination.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadMovies } from '../../../../store/reducers/moviesReducer';
+import * as storage from '../../../../localStorage/storage';
 
 import PageBtn from '../Page-Btn/Page-Btn';
 import getVirtualPage from './paginator-function';
@@ -25,6 +26,7 @@ function Pagination() {
   const handleClickPage = ({ target }) => {
     const activePage = target.textContent;
     const page = getVirtualPage(activePage, statePage);
+    storage.setCurrentPageNumber(page);
     dispatch(loadMovies({ page, sortBy }));
   };
 

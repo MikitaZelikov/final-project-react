@@ -1,19 +1,20 @@
 import './filter.scss';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadMovies } from '../../../../store/reducers/moviesReducer';
 import addBtn from '../../../../assets/icon/add.svg';
+import * as storage from '../../../../localStorage/storage';
 
 const getCurrentPage = (state) => state.moviesData.page;
+const getCurrentSort = (state) => state.moviesData.sortBy;
 
 function Filter() {
-  const [activeFilterEl, setActiveFilterEl] = useState('none');
   const dispatch = useDispatch();
   const page = useSelector(getCurrentPage);
+  const currentSort = useSelector(getCurrentSort);
 
   const handleChange = ({ target }) => {
     const sortBy = target.value;
-    setActiveFilterEl(sortBy);
+    storage.setCurrentSortOption(sortBy);
     dispatch(loadMovies({ page, sortBy }));
   };
 
@@ -24,9 +25,9 @@ function Filter() {
           className="sort-form__select"
           name="sort-select"
           id="sort-select"
-          value={activeFilterEl}
+          value={currentSort}
           onChange={handleChange}>
-          <option className="sort-form__item sort-form__item--none" value="none">
+          <option className="sort-form__item sort-form__item--none" value="">
             none
           </option>
           <option className="sort-form__item sort-form__item--rating-asc" value="vote_average.asc">

@@ -29,7 +29,7 @@ function Profile() {
       <div className="poster-box">
         <img className="poster-box__img" src={movie.posterPath} alt="movie poster" />
         <form className="poster-box__form-vote" action="#">
-          <label for="vote-select">Мой рейтинг:</label>
+          <label htmlFor="vote-select">Мой рейтинг:</label>
           <select className="form-vote__select" name="vote-select" id="vote-select">
             <option value="1">1</option>
             <option value="2">2</option>

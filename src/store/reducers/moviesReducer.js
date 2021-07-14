@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as galleryApi from '../../api/gallery-api';
+import * as storage from '../../localStorage/storage';
 
 const initialState = {
   isLoading: false,
   data: {},
-  page: 1,
-  sortBy: null,
+  page: storage.getCurrentPageNumber() || 1,
+  sortBy: storage.getCurrentSortOption() || null,
 };
 
 export const loadMovies = createAsyncThunk(

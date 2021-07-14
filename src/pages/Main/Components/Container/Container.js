@@ -2,6 +2,7 @@ import './container.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
+// import * as storage from '../../../../localStorage/storage';
 import { loadMovies } from '../../../../store/reducers/moviesReducer';
 import Movie from '../Movie/Movie';
 import Loader from '../Loader/Loader';
@@ -14,12 +15,15 @@ function Container() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // page = storage.getCurrentPageNumber() || page;
+    // sortBy = storage.getCurrentSortOption() || sortBy;
+    // debugger;
     dispatch(loadMovies({ page, sortBy }));
   }, [dispatch]);
 
-  const page = useSelector(getCurrentPage);
+  let page = useSelector(getCurrentPage);
   const movies = useSelector(getMovies);
-  const sortBy = useSelector(getSortBy);
+  let sortBy = useSelector(getSortBy);
 
   return (
     <div className="container">
