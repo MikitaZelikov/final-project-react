@@ -1,5 +1,6 @@
 import './header.scss';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import homepageBtn from '../../../../assets/icon/homepage.svg';
 import * as storage from '../../../../localStorage/storage';
 import { loadMovies } from '../../../../store/reducers/moviesReducer';
@@ -10,19 +11,22 @@ function Header() {
   const handleClickHome = () => {
     storage.removeCurrentPageNumber();
     storage.removeCurrentSortOption();
-    dispatch(loadMovies(1, null));
+    dispatch(loadMovies(1, ''));
   };
 
   return (
     <header className="navigation">
       <div className="navigation__home-btn">
-        <a className="navigation__link" href="/" onClick={handleClickHome}>
+        <Link className="navigation__link" to="/" onClick={handleClickHome}>
           <img src={homepageBtn} alt="домашняя страница" />
-        </a>
+        </Link>
       </div>
-      <div className="navigation__login-btn">
-        <a className="navigation__registration-btn" href="#">Sign in / Sign up</a>
-      </div>
+      {!window.location.pathname.includes('/sign')
+        && <div className="navigation__login-btn">
+          <Link className="navigation__registration-btn" to="/sign-in">
+            Sign in / Sign up
+          </Link>
+        </div>}
     </header>
   );
 }

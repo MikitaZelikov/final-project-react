@@ -1,0 +1,49 @@
+.sign-in-form {
+  margin: 0 auto;
+  max-width: 280px;
+  min-width: 170px;
+  padding: 5vw 10vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+
+  &__title {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  &__submit-btn {
+    flex-grow: 1;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__box-btn {
+    column-gap: 1em;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      text-align: center;
+      flex-grow: 1;
+      color: #000000;
+      text-decoration: none;
+      padding: 4px 6px;
+      border: 1px solid;
+      border-radius: 3px;
+
+      &:hover {
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+      }
+
+      &:active {
+        background-color: #f0b3b3;
+      }
+    }
+  }
+}
