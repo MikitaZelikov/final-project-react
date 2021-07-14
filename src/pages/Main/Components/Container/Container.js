@@ -15,9 +15,6 @@ function Container() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // page = storage.getCurrentPageNumber() || page;
-    // sortBy = storage.getCurrentSortOption() || sortBy;
-    // debugger;
     dispatch(loadMovies({ page, sortBy }));
   }, [dispatch]);
 

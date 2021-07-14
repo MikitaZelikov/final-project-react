@@ -6,7 +6,7 @@ const initialState = {
   isLoading: false,
   data: {},
   page: storage.getCurrentPageNumber() || 1,
-  sortBy: storage.getCurrentSortOption() || null,
+  sortBy: storage.getCurrentSortOption() || '',
 };
 
 export const loadMovies = createAsyncThunk(
