@@ -1,0 +1,16 @@
+[
+  {
+    "email": "admin@movies.com",
+    "name": "Adminius",
+    "surname": "Adminius",
+    "password": "1234567",
+    "role": "admin"
+  },
+  {
+    "email": "nikita@movies.com",
+    "name": "Nikitos",
+    "surname": "Zelikov",
+    "password": "7654321",
+    "role": "user"
+  }
+]

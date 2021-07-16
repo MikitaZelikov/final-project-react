@@ -24,6 +24,18 @@
     column-gap: 1em;
   }
 
+  &__box-input {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+  }
+
+  &__validation-mess {
+    padding-top: 0.5em;
+    font-size: 0.7em;
+    color: red;
+  }
+
   div {
     display: flex;
     justify-content: space-between;
