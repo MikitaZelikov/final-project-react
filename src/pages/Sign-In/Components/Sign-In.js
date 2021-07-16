@@ -1,9 +1,14 @@
-import './sign-in.scss';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+import './sign-in.scss';
 import Header from '../../Main/Components/Header/Header';
+import * as auth from '../../../auth/auth-user';
+
+const getDummyUsers = (state) => state.usersData.dummyUsers;
 
 function SignIn() {
   const SignInSchema = yup.object().shape({
@@ -11,7 +16,10 @@ function SignIn() {
     password: yup.string().typeError('должно быть строкой').required('это поле обязательное'),
   });
 
-  return (
+  const stateUsers = useSelector(getDummyUsers);
+  const [isAuth, setIsAuth] = useState(false);
+
+  return isAuth ? (<Redirect to='/' />) : (
     <div>
       <Header />
       <Formik
@@ -20,9 +28,16 @@ function SignIn() {
           password: '',
         }}
         validateOnBlur
-        onSubmit={(data) => {
-          // eslint-disable-next-line no-console
-          console.log(data);
+        onSubmit={(formData) => {
+          const result = auth.verificationUser(formData, stateUsers);
+          if (result.success) {
+            setIsAuth(result.success);
+            // eslint-disable-next-line no-alert
+            alert(result.text);
+          } else {
+            // eslint-disable-next-line no-alert
+            alert(result.text);
+          }
         }}
         validationSchema={SignInSchema}
       >

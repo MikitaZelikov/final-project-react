@@ -23,3 +23,29 @@ export function getCurrentPageNumber() {
 export function removeCurrentPageNumber() {
   sessionStorage.removeItem('currentPageNumber');
 }
+
+// for new users
+export function addNewUser(newUsers) {
+  localStorage.setItem('newUsers', newUsers);
+}
+
+export function getNewUsers() {
+  return localStorage.getItem('newUsers');
+}
+
+export function removeNewUsers() {
+  localStorage.removeItem('newUsers');
+}
+
+// for current user
+export function setCurrentUser(user) {
+  localStorage.setItem('currentUser', user);
+}
+
+export function getCurrentUser() {
+  return localStorage.getItem('currentUser');
+}
+
+export function removeCurrentUser() {
+  localStorage.removeItem('currentUser');
+}

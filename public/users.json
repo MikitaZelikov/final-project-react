@@ -1,8 +1,8 @@
 [
   {
     "email": "admin@movies.com",
-    "name": "Adminius",
-    "surname": "Adminius",
+    "name": "Administrator",
+    "surname": "Administrator",
     "password": "1234567",
     "role": "admin"
   },
