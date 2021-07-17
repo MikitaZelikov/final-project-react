@@ -25,17 +25,19 @@ export function removeCurrentPageNumber() {
 }
 
 // for new users
-export function addNewUser(newUsers) {
-  localStorage.setItem('newUsers', newUsers);
+export function addNewUser(newUser) {
+  const newUsers = JSON.parse(getNewUsers());
+  newUsers.push(newUser);
+  localStorage.setItem('newUsers', JSON.stringify(newUsers));
 }
 
 export function getNewUsers() {
   return localStorage.getItem('newUsers');
 }
 
-export function removeNewUsers() {
-  localStorage.removeItem('newUsers');
-}
+// export function removeNewUsers() {
+//   localStorage.removeItem('newUsers');
+// }
 
 // for current user
 export function setCurrentUser(user) {

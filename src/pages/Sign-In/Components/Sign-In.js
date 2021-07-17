@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -8,15 +8,21 @@ import './sign-in.scss';
 import Header from '../../Main/Components/Header/Header';
 import * as auth from '../../../auth/auth-user';
 
-const getDummyUsers = (state) => state.usersData.dummyUsers;
+// const getDummyUsers = (state) => state.usersData.dummyUsers;
 
 function SignIn() {
   const SignInSchema = yup.object().shape({
-    email: yup.string().email('введите верный email').required('это поле обязательное'),
-    password: yup.string().typeError('должно быть строкой').required('это поле обязательное'),
+    email: yup
+      .string()
+      .email('введите верный email')
+      .required('это поле обязательное'),
+    password: yup
+      .string()
+      .typeError('должно быть строкой')
+      .required('это поле обязательное'),
   });
 
-  const stateUsers = useSelector(getDummyUsers);
+  // const stateUsers = useSelector(getDummyUsers);
   const [isAuth, setIsAuth] = useState(false);
 
   return isAuth ? (<Redirect to='/' />) : (
@@ -29,7 +35,7 @@ function SignIn() {
         }}
         validateOnBlur
         onSubmit={(formData) => {
-          const result = auth.verificationUser(formData, stateUsers);
+          const result = auth.verificationUser(formData);
           if (result.success) {
             setIsAuth(result.success);
             // eslint-disable-next-line no-alert
