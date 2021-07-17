@@ -1,3 +1,5 @@
+import * as storage from '../localStorage/storage';
+
 const apiKey = 'b1fec506f718f740d5503bd4b1c1c393';
 
 /**
@@ -33,4 +35,19 @@ export async function getGenres() {
     throw new Error(`${response.status} ${response.statusText}`);
   }
   return response.json();
+}
+
+export async function getMergeUsers() {
+  const response = await fetch('/users.json');
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  }
+  const dummyUsers = await response.json();
+  const storageUsers = storage.getNewUsers();
+  if (!storageUsers) localStorage.setItem('newUsers', JSON.stringify([]));
+  const isUsers = storageUsers ? JSON.parse(storageUsers) : [];
+  isUsers.push(...dummyUsers);
+  // eslint-disable-next-line no-console
+  console.log(isUsers);
+  return isUsers;
 }

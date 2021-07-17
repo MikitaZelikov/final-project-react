@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -8,7 +8,7 @@ import './sign-in.scss';
 import Header from '../../Main/Components/Header/Header';
 import * as auth from '../../../auth/auth-user';
 
-// const getDummyUsers = (state) => state.usersData.dummyUsers;
+const getDummyUsers = (state) => state.usersData.allUsers;
 
 function SignIn() {
   const SignInSchema = yup.object().shape({
@@ -22,7 +22,7 @@ function SignIn() {
       .required('это поле обязательное'),
   });
 
-  // const stateUsers = useSelector(getDummyUsers);
+  const stateUsers = useSelector(getDummyUsers);
   const [isAuth, setIsAuth] = useState(false);
 
   return isAuth ? (<Redirect to='/' />) : (
@@ -35,7 +35,7 @@ function SignIn() {
         }}
         validateOnBlur
         onSubmit={(formData) => {
-          const result = auth.verificationUser(formData);
+          const result = auth.verificationUser(formData, stateUsers);
           if (result.success) {
             setIsAuth(result.success);
             // eslint-disable-next-line no-alert
