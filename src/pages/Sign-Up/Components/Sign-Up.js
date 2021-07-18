@@ -91,10 +91,10 @@ function SignUp() {
                   name="email"
                   placeholder="email"
                 />
-                {touched.email && errors.email
-                  && <span className="sign-up-form__validation-mess">
+                {touched.email && errors.email && (
+                  <span className="sign-up-form__validation-mess">
                     {errors.email}
-                  </span>}
+                  </span>)}
               </div>
             </div>
 
@@ -111,10 +111,10 @@ function SignUp() {
                   name="name"
                   placeholder="name"
                 />
-                {touched.name && errors.name
-                  && <span className="sign-up-form__validation-mess">
+                {touched.name && errors.name && (
+                  <span className="sign-up-form__validation-mess">
                     {errors.name}
-                  </span>}
+                  </span>)}
               </div>
             </div>
 
@@ -131,10 +131,10 @@ function SignUp() {
                   name="surname"
                   placeholder="surname"
                 />
-                {touched.surname && errors.surname
-                  && <span className="sign-up-form__validation-mess">
+                {touched.surname && errors.surname && (
+                  <span className="sign-up-form__validation-mess">
                     {errors.surname}
-                  </span>}
+                  </span>)}
               </div>
             </div>
 
@@ -151,10 +151,10 @@ function SignUp() {
                   name="password"
                   placeholder="password"
                 />
-                {touched.password && errors.password
-                  && <span className="sign-up-form__validation-mess">
+                {touched.password && errors.password && (
+                  <span className="sign-up-form__validation-mess">
                     {errors.password}
-                  </span>}
+                  </span>)}
               </div>
             </div>
 
@@ -171,10 +171,10 @@ function SignUp() {
                   name="confirmPassword"
                   placeholder="Confirm password"
                 />
-                {touched.confirmPassword && errors.confirmPassword
-                  && <span className="sign-up-form__validation-mess">
+                {touched.confirmPassword && errors.confirmPassword && (
+                  <span className="sign-up-form__validation-mess">
                     {errors.confirmPassword}
-                  </span>}
+                  </span>)}
               </div>
             </div>
 
