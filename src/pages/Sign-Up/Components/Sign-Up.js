@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -39,10 +38,9 @@ function SignUp() {
   });
 
   const stateUsers = useSelector(getDummyUsers);
-  const [isAuth, setIsAuth] = useState(false);
   const dispatch = useDispatch();
 
-  return isAuth ? (<Redirect to='/' />) : (
+  return (
     <div>
       <Header />
       <Formik
@@ -57,7 +55,6 @@ function SignUp() {
         onSubmit={(formData) => {
           const result = auth.registrationUser(formData, stateUsers);
           if (result.success) {
-            setIsAuth(result.success);
             dispatch(addUser(result.user));
             // eslint-disable-next-line no-alert
             alert(result.text);

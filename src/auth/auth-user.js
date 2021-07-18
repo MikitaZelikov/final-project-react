@@ -6,7 +6,8 @@ export function verificationUser(formData, stateUsers) {
   if (verifyUser.password !== formData.password) {
     return { success: false, text: 'неправильно введен пароль' };
   }
-  return { success: true, text: `добро пожаловать на сайт, ${verifyUser.name}` };
+  storage.setCurrentUser(JSON.stringify(verifyUser));
+  return { success: true, user: verifyUser, text: `добро пожаловать на сайт, ${verifyUser.name}` };
 }
 
 export function registrationUser(formData, stateUsers) {
@@ -22,6 +23,6 @@ export function registrationUser(formData, stateUsers) {
   };
 
   storage.addNewUser(newUser);
-
+  storage.setCurrentUser(JSON.stringify(newUser));
   return { success: true, user: newUser, text: `добро пожаловать на сайт, ${newUser.name}` };
 }

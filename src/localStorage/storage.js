@@ -35,19 +35,11 @@ export function getNewUsers() {
   return localStorage.getItem('newUsers');
 }
 
-// export function removeNewUsers() {
-//   localStorage.removeItem('newUsers');
-// }
-
 // for current user
 export function setCurrentUser(user) {
-  localStorage.setItem('currentUser', user);
+  sessionStorage.setItem('currentUser', user);
 }
 
 export function getCurrentUser() {
-  return localStorage.getItem('currentUser');
-}
-
-export function removeCurrentUser() {
-  localStorage.removeItem('currentUser');
+  return sessionStorage.getItem('currentUser');
 }

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import PrivateRoute from './PrivateRoute';
 import { loadUsers } from '../store/reducers/usersReducer';
 import Main from '../pages/Main/Components/Main/Main';
 import Details from '../pages/Details/Components/Details/Details';
@@ -11,12 +12,16 @@ import SignIn from '../pages/Sign-In/Components/Sign-In';
 import SignUp from '../pages/Sign-Up/Components/Sign-Up';
 // import NotFoundPage from '../pages/Not-Found/Components/Not-Found';
 
+const getIsAuth = (state) => state.usersData.isAuth;
+
 function Basic() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadUsers());
   }, [dispatch]);
+
+  const isAuth = useSelector(getIsAuth);
 
   return (
     <Switch>
@@ -32,12 +37,12 @@ function Basic() {
         <Route path='/edit' exact>
         <Edit />
       </Route> */}
-      <Route path='/sign-in' exact>
+      <PrivateRoute path='/sign-in' exact isAuth={isAuth}>
         <SignIn />
-      </Route>
-      <Route path='/sign-up' exact>
+      </PrivateRoute>
+      <PrivateRoute path='/sign-up' exact isAuth={isAuth}>
         <SignUp />
-      </Route>
+      </PrivateRoute>
       {/* <NotFoundPage /> */}
     </Switch>
   );

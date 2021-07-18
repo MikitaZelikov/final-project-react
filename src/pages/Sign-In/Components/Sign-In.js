@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import './sign-in.scss';
+import { addCurrentUser } from '../../../store/reducers/usersReducer';
 import Header from '../../Main/Components/Header/Header';
 import * as auth from '../../../auth/auth-user';
 
@@ -23,9 +23,9 @@ function SignIn() {
   });
 
   const stateUsers = useSelector(getDummyUsers);
-  const [isAuth, setIsAuth] = useState(false);
+  const dispatch = useDispatch();
 
-  return isAuth ? (<Redirect to='/' />) : (
+  return (
     <div>
       <Header />
       <Formik
@@ -37,7 +37,7 @@ function SignIn() {
         onSubmit={(formData) => {
           const result = auth.verificationUser(formData, stateUsers);
           if (result.success) {
-            setIsAuth(result.success);
+            dispatch(addCurrentUser(result.user));
             // eslint-disable-next-line no-alert
             alert(result.text);
           } else {
