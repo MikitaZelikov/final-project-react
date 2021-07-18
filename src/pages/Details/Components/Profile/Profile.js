@@ -1,14 +1,14 @@
-import './profile.scss';
-import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useParams, Link } from 'react-router-dom';
 
+import './profile.scss';
 import poster from '../../../../assets/icon/logoMovie.jpg';
 import iconEdit from '../../../../assets/icon/edit.svg';
 import iconDel from '../../../../assets/icon/delete.svg';
 import * as galleryApi from '../../../../api/gallery-api';
 
-function Profile() {
+function Profile({ isAuth, currentUser }) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [movie, setObjMovie] = useState({ data: {}, posterPath: '', movieGenres: '' });
@@ -28,22 +28,24 @@ function Profile() {
     <figure className="details-container">
       <div className="poster-box">
         <img className="poster-box__img" src={movie.posterPath} alt="movie poster" />
-        <form className="poster-box__form-vote" action="#">
-          <label htmlFor="vote-select">Мой рейтинг:</label>
-          <select className="form-vote__select" name="vote-select" id="vote-select">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-          <input className="form-vote__button" type="submit" value="Ok" />
-        </form>
+        {isAuth && (
+          <form className="poster-box__form-vote" action="#">
+            <label htmlFor="vote-select">Мой рейтинг:</label>
+            <select className="form-vote__select" name="vote-select" id="vote-select">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+            <input className="form-vote__button" type="submit" value="Ok" />
+          </form>)
+        }
       </div>
       <figcaption className="description-box">
         <p className="description-box__title">{movie.data.title}</p>
@@ -54,18 +56,20 @@ function Profile() {
         <p className="description-box__vote-count">{`Число голосов: ${movie.data.vote_count}`}</p>
         <p className="description-box__vote-average">{`Рейтинг: ${movie.data.vote_average}`}</p>
       </figcaption>
-      <div className="edit-box">
-        <span className="edit-box__correction">
-          <a href="#" className="edit-box__link">
-            <img className="edit-box__icon" src={iconEdit} alt="иконка править" />
-          </a>
-        </span>
-        <span className="edit-box__delete">
-          <a href="#" className="edit-box__link">
-            <img className="edit-box__icon" src={iconDel} alt="иконка удалить" />
-          </a>
-        </span>
-      </div>
+      {isAuth && currentUser.role === 'admin' && (
+        <div className="edit-box">
+          <span className="edit-box__correction">
+            <Link to="/edit" className="edit-box__link">
+              <img className="edit-box__icon" src={iconEdit} alt="иконка править" />
+            </Link>
+          </span>
+          <span className="edit-box__delete">
+            <Link to="#" className="edit-box__link">
+              <img className="edit-box__icon" src={iconDel} alt="иконка удалить" />
+            </Link>
+          </span>
+        </div>)
+      }
     </figure>
   ) : null;
 }

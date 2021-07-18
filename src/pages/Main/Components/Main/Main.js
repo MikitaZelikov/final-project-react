@@ -4,13 +4,22 @@ import Filter from '../Filter/Filter';
 import Container from '../Container/Container';
 import Pagination from '../Pagination/Pagination';
 
-function Main() {
+function Main({ isAuth, currentUser }) {
   return (
     <div>
-      <Header />
+      <Header
+        isAuth={isAuth}
+        currentUser={currentUser}
+      />
       <div className="content">
-        <Filter />
-        <Container />
+        <Filter
+          isAuth={isAuth}
+          currentUser={currentUser}
+        />
+        <Container
+          isAuth={isAuth}
+          currentUser={currentUser}
+        />
         <Pagination />
       </div>
     </div>

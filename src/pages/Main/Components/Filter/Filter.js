@@ -1,5 +1,7 @@
-import './filter.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import './filter.scss';
 import { loadMovies } from '../../../../store/reducers/moviesReducer';
 import addBtn from '../../../../assets/icon/add.svg';
 import * as storage from '../../../../localStorage/storage';
@@ -7,7 +9,7 @@ import * as storage from '../../../../localStorage/storage';
 const getCurrentPage = (state) => state.moviesData.page;
 const getCurrentSort = (state) => state.moviesData.sortBy;
 
-function Filter() {
+function Filter({ isAuth, currentUser }) {
   const dispatch = useDispatch();
   const page = useSelector(getCurrentPage);
   const currentSort = useSelector(getCurrentSort);
@@ -50,9 +52,11 @@ function Filter() {
           </option>
         </select>
       </form>
-      <a className="add-movie-link" href="#">
-        <img src={addBtn} alt="кнопка добавления фильма" />
-      </a>
+      {isAuth && currentUser.role === 'admin'
+        && <Link className="add-movie-link" to="/add">
+          <img src={addBtn} alt="кнопка добавления фильма" />
+        </Link>
+      }
     </div>
   );
 }

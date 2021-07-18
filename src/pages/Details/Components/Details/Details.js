@@ -2,12 +2,18 @@ import './details.scss';
 import Profile from '../Profile/Profile';
 import Header from '../../../Main/Components/Header/Header';
 
-function Details() {
+function Details({ isAuth, currentUser }) {
   return (
     <div>
-      <Header />
+      <Header
+        isAuth={isAuth}
+        currentUser={currentUser}
+      />
       <article className="details-wrapper">
-        <Profile />
+        <Profile
+          isAuth={isAuth}
+          currentUser={currentUser}
+        />
       </article>
     </div>
   );

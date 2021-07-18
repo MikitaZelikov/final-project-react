@@ -41,5 +41,6 @@ module.exports = {
     'react/jsx-uses-vars': 'error',
     camelcase: ['error', { ignoreDestructuring: true }],
     'no-debugger': 'off',
+    'no-unused-expressions': ['error', { allowShortCircuit: false }],
   },
 };

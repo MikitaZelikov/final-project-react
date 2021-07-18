@@ -7,9 +7,11 @@ function Movie(props) {
   const {
     poster_path: posterPath,
     release_date: releaseDate,
+    vote_average: voteAverage,
     title,
     id,
-    vote_average: voteAverage,
+    isAuth,
+    currentUser,
   } = props;
 
   let urlPosterMovie = logoMovie;
@@ -29,9 +31,11 @@ function Movie(props) {
       <p className="container-element__text container-element__text--hover">
         Премьера: <strong>{releaseDate}</strong>
       </p>
-      <a className="container-element__remove-link" href="#">
-        <img src={deleteBtn} alt="кнопка удаления фильма" />
-      </a>
+      {isAuth && currentUser.role === 'admin'
+        && <Link to="#" className="container-element__remove-link">
+          <img src={deleteBtn} alt="кнопка удаления фильма" />
+        </Link>
+      }
     </div>
   );
 }

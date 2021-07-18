@@ -11,7 +11,7 @@ const getMovies = (state) => state.moviesData.data;
 const getCurrentPage = (state) => state.moviesData.page;
 const getSortBy = (state) => state.moviesData.sortBy;
 
-function Container() {
+function Container({ isAuth, currentUser }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,6 +29,8 @@ function Container() {
         <Movie
           key={movie.id}
           {...movie}
+          isAuth={isAuth}
+          currentUser={currentUser}
         />
       ))}
     </div>

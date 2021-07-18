@@ -41,5 +41,10 @@ export function setCurrentUser(user) {
 }
 
 export function getCurrentUser() {
-  return sessionStorage.getItem('currentUser');
+  const currentUser = sessionStorage.getItem('currentUser');
+  return JSON.parse(currentUser);
+}
+
+export function removeCurrentUser() {
+  sessionStorage.removeItem('currentUser');
 }

@@ -13,6 +13,7 @@ import SignUp from '../pages/Sign-Up/Components/Sign-Up';
 // import NotFoundPage from '../pages/Not-Found/Components/Not-Found';
 
 const getIsAuth = (state) => state.usersData.isAuth;
+const getCurrentUser = (state) => state.usersData.currentUser;
 
 function Basic() {
   const dispatch = useDispatch();
@@ -22,14 +23,21 @@ function Basic() {
   }, [dispatch]);
 
   const isAuth = useSelector(getIsAuth);
+  const currentUser = useSelector(getCurrentUser);
 
   return (
     <Switch>
       <Route path='/' exact>
-        <Main />
+        <Main
+          isAuth={isAuth}
+          currentUser={currentUser}
+        />
       </Route>
       <Route path='/details/:id' exact>
-        <Details />
+        <Details
+          isAuth={isAuth}
+          currentUser={currentUser}
+        />
       </Route>
       {/* <Route path='/add' exact>
         <Add />
