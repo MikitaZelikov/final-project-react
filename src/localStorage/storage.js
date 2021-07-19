@@ -20,9 +20,9 @@ export function getCurrentPageNumber() {
   return +sessionStorage.getItem('currentPageNumber');
 }
 
-export function removeCurrentPageNumber() {
-  sessionStorage.removeItem('currentPageNumber');
-}
+// export function removeCurrentPageNumber() {
+//   sessionStorage.removeItem('currentPageNumber');
+// }
 
 // for new users
 export function addNewUser(newUser) {

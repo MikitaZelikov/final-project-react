@@ -61,7 +61,8 @@ function Basic() {
         <SignUp />
       </PrivateRoute>
 
-      <NotFoundPage path='/not-found-page' exact />
+      <NotFoundPage path='/not-found-page' />
+      <NotFoundPage />
     </Switch>
   );
 }

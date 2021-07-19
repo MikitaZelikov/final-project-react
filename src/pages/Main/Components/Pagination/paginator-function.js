@@ -21,7 +21,7 @@ export default function getVirtualPage(activePage, statePage) {
       }
       return statePage + 1;
     default:
-      if (!activePage) {
+      if (!+activePage) {
         return statePage;
       }
       return +activePage;

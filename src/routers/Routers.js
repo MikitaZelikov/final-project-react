@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
-import store from '../store/configStore';
 
 import Basic from './Basic';
+import store from '../store/configStore';
 import '../normalize.scss';
 
 function Routers() {

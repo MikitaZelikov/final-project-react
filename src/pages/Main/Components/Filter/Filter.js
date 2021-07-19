@@ -28,7 +28,8 @@ function Filter({ isAuth, currentUser }) {
           name="sort-select"
           id="sort-select"
           value={currentSort}
-          onChange={handleChange}>
+          onChange={handleChange}
+        >
           <option className="sort-form__item sort-form__item--none" value="">
             none
           </option>
@@ -52,11 +53,11 @@ function Filter({ isAuth, currentUser }) {
           </option>
         </select>
       </form>
-      {isAuth && currentUser.role === 'admin'
-        && <Link className="add-movie-link" to="/add">
+      {isAuth && currentUser.role === 'admin' && (
+        <Link className="add-movie-link" to="/add">
           <img src={addBtn} alt="кнопка добавления фильма" />
         </Link>
-      }
+      )}
     </div>
   );
 }

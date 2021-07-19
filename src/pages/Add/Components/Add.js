@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import './add.scss';
 import Header from '../../Main/Components/Header/Header';
+import Genre from './Genre';
+import { loadGenres } from '../../../store/reducers/genresReducer';
+
+const getGenresState = (state) => state.genresData.genres;
 
 function Add(rest) {
   const AddSchema = yup.object().shape({
@@ -32,11 +38,13 @@ function Add(rest) {
       .date()
       .required('это поле обязательное'),
     genres: yup
-      .string()
+      .array()
+      .min(1, 'выберите жанр фильма')
       .required('это поле обязательное'),
     voteAverage: yup
       .number()
       .typeError('должно быть числом')
+      .positive('число должно быть положительное')
       .max(10, 'число не более 10')
       // .round(1)
       .required('это поле обязательное'),
@@ -46,6 +54,12 @@ function Add(rest) {
       .integer('число должно быть целое')
       .positive('число должно быть положительное')
       .required('это поле обязательное'),
+  });
+  const dispatch = useDispatch();
+  const genresState = useSelector(getGenresState);
+
+  useEffect(() => {
+    dispatch(loadGenres());
   });
 
   return (
@@ -77,10 +91,10 @@ function Add(rest) {
           handleChange,
           handleBlur,
           isValid,
-          // handleSubmit,
+          handleSubmit,
           dirty,
         }) => (
-          <form className="add-movie-form" method="POST" action="#">
+          <form className="add-movie-form" method="POST" action="#" onSubmit={handleSubmit}>
 
             <div>
               <label htmlFor="title">Title:</label>
@@ -188,12 +202,12 @@ function Add(rest) {
                   className="add-movie-form__input genres-select"
                   name="genres"
                   id="genres"
-                  // multiple size="5"
+                  multiple
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.genres}
+                // value={values.genres}
                 >
-                  <option>genre-name</option>
+                  {genresState?.map((genre) => <Genre name={genre.name} />)}
                 </select>
                 {touched.genres && errors.genres && (
                   <span className="sign-up-form__validation-mess">
@@ -209,8 +223,6 @@ function Add(rest) {
                   className="add-movie-form__input"
                   type="number"
                   // step="0.1"
-                  // min="0"
-                  // max="10"
                   id="voteAverage"
                   name="voteAverage"
                   placeholder="vote-average"

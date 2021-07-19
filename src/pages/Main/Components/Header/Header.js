@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import './header.scss';
 import homepageBtn from '../../../../assets/icon/homepage.svg';
 import * as storage from '../../../../localStorage/storage';
-import { loadMovies } from '../../../../store/reducers/moviesReducer';
+import { resetValue } from '../../../../store/reducers/moviesReducer';
 import { logOut } from '../../../../store/reducers/usersReducer';
 
 function Header({ isAuth, currentUser }) {
   const dispatch = useDispatch();
 
   const handleClickHome = () => {
-    storage.removeCurrentPageNumber();
-    storage.removeCurrentSortOption();
-    dispatch(loadMovies(1, ''));
+    storage.setCurrentPageNumber(1);
+    storage.setCurrentSortOption('');
+    dispatch(resetValue());
   };
 
   const handleClickLogOut = () => {
@@ -24,9 +24,9 @@ function Header({ isAuth, currentUser }) {
   return (
     <header className="navigation">
       <div className="navigation__home-btn">
-        <Link className="navigation__link" to="/" onClick={handleClickHome}>
+        <a href="/" className="navigation__link" onClick={handleClickHome}>
           <img src={homepageBtn} alt="домашняя страница" />
-        </Link>
+        </a>
       </div>
       {!window.location.pathname.includes('/sign') && (
         <div className="navigation__login-btn">
