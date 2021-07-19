@@ -20,10 +20,8 @@ function Profile({ isAuth, currentUser }) {
   const isVote = voted.includes(id);
 
   const [movie, setObjMovie] = useState({ data: {}, posterPath: '', movieGenres: '' });
-  // const [rating, setRating] = useState(0);
 
   const handleRating = () => {
-    // setRating(1);
     storage.addVotedMovies(id);
     dispatch(addVoted(id));
   };

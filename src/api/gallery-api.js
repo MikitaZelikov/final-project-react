@@ -47,7 +47,5 @@ export async function getMergeUsers() {
   if (!storageUsers) localStorage.setItem('newUsers', JSON.stringify([]));
   const isUsers = storageUsers ? JSON.parse(storageUsers) : [];
   isUsers.push(...dummyUsers);
-  // eslint-disable-next-line no-console
-  console.log(isUsers);
   return isUsers;
 }
