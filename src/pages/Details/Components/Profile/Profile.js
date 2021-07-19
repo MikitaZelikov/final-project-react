@@ -79,7 +79,7 @@ function Profile({ isAuth, currentUser }) {
       {isAuth && currentUser.role === 'admin' && (
         <div className="edit-box">
           <span className="edit-box__correction">
-            <Link to="/edit" className="edit-box__link">
+            <Link to="#" className="edit-box__link">
               <img className="edit-box__icon" src={iconEdit} alt="иконка править" />
             </Link>
           </span>

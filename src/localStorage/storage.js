@@ -46,7 +46,6 @@ export function addVotedMovies(id) {
   const isVoted = getVotedMovies();
   const voted = isVoted || [];
   voted.push(id);
-  debugger;
   localStorage.setItem('voted', JSON.stringify(voted));
 }
 
