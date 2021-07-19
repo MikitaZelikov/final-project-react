@@ -7,10 +7,6 @@ export function getCurrentSortOption() {
   return sessionStorage.getItem('currentSortOption');
 }
 
-export function removeCurrentSortOption() {
-  sessionStorage.removeItem('currentSortOption');
-}
-
 // for paginator
 export function setCurrentPageNumber(page) {
   sessionStorage.setItem('currentPageNumber', page);
@@ -19,10 +15,6 @@ export function setCurrentPageNumber(page) {
 export function getCurrentPageNumber() {
   return +sessionStorage.getItem('currentPageNumber');
 }
-
-// export function removeCurrentPageNumber() {
-//   sessionStorage.removeItem('currentPageNumber');
-// }
 
 // for new users
 export function addNewUser(newUser) {
@@ -47,4 +39,18 @@ export function getCurrentUser() {
 
 export function removeCurrentUser() {
   sessionStorage.removeItem('currentUser');
+}
+
+// for id voted
+export function addVotedMovies(id) {
+  const isVoted = getVotedMovies();
+  const voted = isVoted || [];
+  voted.push(id);
+  debugger;
+  localStorage.setItem('voted', JSON.stringify(voted));
+}
+
+export function getVotedMovies() {
+  const voted = localStorage.getItem('voted');
+  return JSON.parse(voted);
 }

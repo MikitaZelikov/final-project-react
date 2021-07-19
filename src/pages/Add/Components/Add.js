@@ -31,7 +31,6 @@ function Add(rest) {
     popularity: yup
       .number()
       .typeError('должно быть числом')
-      // .round(3)
       .positive('число должно быть положительное')
       .required('это поле обязательное'),
     releaseDate: yup
@@ -46,7 +45,6 @@ function Add(rest) {
       .typeError('должно быть числом')
       .positive('число должно быть положительное')
       .max(10, 'число не более 10')
-      // .round(1)
       .required('это поле обязательное'),
     voteCount: yup
       .number()
@@ -75,7 +73,7 @@ function Add(rest) {
           genres: '',
           voteAverage: '',
           voteCount: '',
-
+          adult: '',
         }}
         validateOnBlur
         onSubmit={(formData) => {
@@ -93,6 +91,7 @@ function Add(rest) {
           isValid,
           handleSubmit,
           dirty,
+          resetForm,
         }) => (
           <form className="add-movie-form" method="POST" action="#" onSubmit={handleSubmit}>
 
@@ -205,9 +204,9 @@ function Add(rest) {
                   multiple
                   onChange={handleChange}
                   onBlur={handleBlur}
-                // value={values.genres}
+                // value={state?.value}
                 >
-                  {genresState?.map((genre) => <Genre name={genre.name} />)}
+                  {genresState?.map((genre, idx) => <Genre key={idx} name={genre.name} />)}
                 </select>
                 {touched.genres && errors.genres && (
                   <span className="sign-up-form__validation-mess">
@@ -222,7 +221,6 @@ function Add(rest) {
                 <input
                   className="add-movie-form__input"
                   type="number"
-                  // step="0.1"
                   id="voteAverage"
                   name="voteAverage"
                   placeholder="vote-average"
@@ -276,7 +274,11 @@ function Add(rest) {
                 value="Add"
                 disabled={!isValid || !dirty}
               />
-              <Link className="add-movie-form__clear-btn" to="#">
+              <Link
+                className="add-movie-form__clear-btn"
+                to="#"
+                onClick={resetForm}
+              >
                 Clear
               </Link>
             </div>

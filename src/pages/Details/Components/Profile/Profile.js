@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 
 import './profile.scss';
@@ -7,11 +7,26 @@ import poster from '../../../../assets/icon/logoMovie.jpg';
 import iconEdit from '../../../../assets/icon/edit.svg';
 import iconDel from '../../../../assets/icon/delete.svg';
 import * as galleryApi from '../../../../api/gallery-api';
+import { addVoted } from '../../../../store/reducers/moviesReducer';
+import * as storage from '../../../../localStorage/storage';
+
+const getVoted = (state) => state.moviesData.voted;
 
 function Profile({ isAuth, currentUser }) {
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  const voted = useSelector(getVoted);
+  const isVote = voted.includes(id);
+
   const [movie, setObjMovie] = useState({ data: {}, posterPath: '', movieGenres: '' });
+  // const [rating, setRating] = useState(0);
+
+  const handleRating = () => {
+    // setRating(1);
+    storage.addVotedMovies(id);
+    dispatch(addVoted(id));
+  };
 
   useEffect(async () => {
     const currentMovie = await galleryApi.getMovie(id);
@@ -43,9 +58,14 @@ function Profile({ isAuth, currentUser }) {
               <option value="9">9</option>
               <option value="10">10</option>
             </select>
-            <input className="form-vote__button" type="submit" value="Ok" />
-          </form>)
-        }
+            <input
+              className="form-vote__button"
+              type="submit"
+              value="Ok"
+              disabled={isVote}
+              onClick={handleRating}
+            />
+          </form>)}
       </div>
       <figcaption className="description-box">
         <p className="description-box__title">{movie.data.title}</p>
@@ -53,7 +73,9 @@ function Profile({ isAuth, currentUser }) {
         <p className="description-box__overview">{`Обзор: ${movie.data.overview}`}</p>
         <p className="description-box__popularity">{`Популярность: ${movie.data.popularity}`}</p>
         <p className="description-box__release">{`Мировая премьера: ${movie.data.release_date}`}</p>
-        <p className="description-box__vote-count">{`Число голосов: ${movie.data.vote_count}`}</p>
+        <p className="description-box__vote-count">
+          {`Число голосов: ${movie.data.vote_count + (isVote ? 1 : 0)}`}
+        </p>
         <p className="description-box__vote-average">{`Рейтинг: ${movie.data.vote_average}`}</p>
       </figcaption>
       {isAuth && currentUser.role === 'admin' && (
