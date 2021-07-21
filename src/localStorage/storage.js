@@ -46,10 +46,23 @@ export function addVotedMovies(id) {
   const isVoted = getVotedMovies();
   const voted = isVoted || [];
   voted.push(id);
-  localStorage.setItem('voted', JSON.stringify(voted));
+  sessionStorage.setItem('voted', JSON.stringify(voted));
 }
 
 export function getVotedMovies() {
-  const voted = localStorage.getItem('voted');
+  const voted = sessionStorage.getItem('voted');
   return JSON.parse(voted);
+}
+
+// for remove movie
+export function addIdRemoveMovie(id) {
+  const idRemoveMovies = getIdRemoveMovies();
+  const isRemoveMovies = idRemoveMovies || [];
+  isRemoveMovies.push(id);
+  sessionStorage.setItem('deletedMovies', JSON.stringify(isRemoveMovies));
+}
+
+export function getIdRemoveMovies() {
+  const deletedMovies = sessionStorage.getItem('deletedMovies');
+  return JSON.parse(deletedMovies);
 }

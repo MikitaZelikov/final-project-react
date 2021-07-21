@@ -58,7 +58,7 @@ function Add(rest) {
 
   useEffect(() => {
     dispatch(loadGenres());
-  });
+  }, [dispatch]);
 
   return (
     <div>

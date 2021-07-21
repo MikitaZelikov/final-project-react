@@ -1,9 +1,14 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './movie.scss';
 import logoMovie from '../../../../assets/icon/logoMovie.jpg';
 import deleteBtn from '../../../../assets/icon/delete.svg';
+import * as storage from '../../../../localStorage/storage';
+import { addIdRemoveMovie } from '../../../../store/reducers/moviesReducer';
 
 function Movie(props) {
+  const dispatch = useDispatch();
+
   const {
     poster_path: posterPath,
     release_date: releaseDate,
@@ -16,6 +21,11 @@ function Movie(props) {
 
   let urlPosterMovie = logoMovie;
   if (posterPath) urlPosterMovie = `http://image.tmdb.org/t/p/w342${posterPath}`;
+
+  const handleRemove = () => {
+    storage.addIdRemoveMovie(String(id));
+    dispatch(addIdRemoveMovie(String(id)));
+  };
 
   return (
     <div className="container__element">
@@ -32,7 +42,7 @@ function Movie(props) {
         Премьера: <strong>{releaseDate}</strong>
       </p>
       {isAuth && currentUser.role === 'admin'
-        && <Link to="#" className="container-element__remove-link">
+        && <Link to="/" className="container-element__remove-link" onClick={handleRemove}>
           <img src={deleteBtn} alt="кнопка удаления фильма" />
         </Link>
       }

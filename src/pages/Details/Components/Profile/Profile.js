@@ -7,7 +7,7 @@ import poster from '../../../../assets/icon/logoMovie.jpg';
 import iconEdit from '../../../../assets/icon/edit.svg';
 import iconDel from '../../../../assets/icon/delete.svg';
 import * as galleryApi from '../../../../api/gallery-api';
-import { addVoted } from '../../../../store/reducers/moviesReducer';
+import { addVoted, addIdRemoveMovie } from '../../../../store/reducers/moviesReducer';
 import * as storage from '../../../../localStorage/storage';
 
 const getVoted = (state) => state.moviesData.voted;
@@ -17,6 +17,7 @@ function Profile({ isAuth, currentUser }) {
   const { id } = useParams();
 
   const voted = useSelector(getVoted);
+
   const isVote = voted.includes(id);
 
   const [movie, setObjMovie] = useState({ data: {}, posterPath: '', movieGenres: '' });
@@ -24,6 +25,11 @@ function Profile({ isAuth, currentUser }) {
   const handleRating = () => {
     storage.addVotedMovies(id);
     dispatch(addVoted(id));
+  };
+
+  const handleRemove = () => {
+    storage.addIdRemoveMovie(id);
+    dispatch(addIdRemoveMovie(id));
   };
 
   useEffect(async () => {
@@ -84,7 +90,7 @@ function Profile({ isAuth, currentUser }) {
             </Link>
           </span>
           <span className="edit-box__delete">
-            <Link to="#" className="edit-box__link">
+            <Link to="/" className="edit-box__link" onClick={handleRemove}>
               <img className="edit-box__icon" src={iconDel} alt="иконка удалить" />
             </Link>
           </span>

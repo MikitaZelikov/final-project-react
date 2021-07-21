@@ -8,6 +8,7 @@ const initialState = {
   page: storage.getCurrentPageNumber() || 1,
   sortBy: storage.getCurrentSortOption() || '',
   voted: storage.getVotedMovies() || [],
+  delMovies: storage.getIdRemoveMovies() || [],
 };
 
 export const loadMovies = createAsyncThunk(
@@ -30,6 +31,9 @@ export const moviesSlice = createSlice({
     addVoted: (state, action) => {
       state.voted.push(action.payload);
     },
+    addIdRemoveMovie: (state, action) => {
+      state.delMovies.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -47,5 +51,5 @@ export const moviesSlice = createSlice({
   },
 });
 
-export const { resetValue, addVoted } = moviesSlice.actions;
+export const { resetValue, addVoted, addIdRemoveMovie } = moviesSlice.actions;
 export default moviesSlice.reducer; // экспорт в configStore
