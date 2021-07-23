@@ -13,8 +13,6 @@ const getRemovedMovies = (state) => state.moviesData.delMovies;
 
 function Container({ isAuth, currentUser }) {
   const dispatch = useDispatch();
-  // eslint-disable-next-line no-console
-  console.log('render');
   const page = useSelector(getCurrentPage);
   const movies = useSelector(getMovies);
   const sortBy = useSelector(getSortBy);

@@ -16,8 +16,6 @@ export async function discoverMovies(page, sortBy) {
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
   }
-  // eslint-disable-next-line no-console
-  console.log('request');
   return response.json();
 }
 
