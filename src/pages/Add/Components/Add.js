@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { nanoid } from 'nanoid';
 
 import './add.scss';
 import Header from '../../Main/Components/Header/Header';
 import Genre from './Genre';
+import * as storage from '../../../localStorage/storage';
 import { loadGenres } from '../../../store/reducers/genresReducer';
+import { addMovie } from '../../../store/reducers/moviesReducer';
 
 const getGenresState = (state) => state.genresData.genres;
 
@@ -24,7 +28,7 @@ function Add(rest) {
       .min(6, 'поле содержит менее 6 символов')
       .max(150, 'поле содержит более 150 символов')
       .required('это поле обязательное'),
-    posterPath: yup
+    poster_path: yup
       .string()
       .typeError('должно быть строкой')
       .required('это поле обязательное'),
@@ -33,20 +37,20 @@ function Add(rest) {
       .typeError('должно быть числом')
       .positive('число должно быть положительное')
       .required('это поле обязательное'),
-    releaseDate: yup
+    release_date: yup
       .date()
       .required('это поле обязательное'),
     genres: yup
       .array()
       .min(1, 'выберите жанр фильма')
       .required('это поле обязательное'),
-    voteAverage: yup
+    vote_average: yup
       .number()
       .typeError('должно быть числом')
       .positive('число должно быть положительное')
       .max(10, 'число не более 10')
       .required('это поле обязательное'),
-    voteCount: yup
+    vote_сount: yup
       .number()
       .typeError('должно быть числом')
       .integer('число должно быть целое')
@@ -67,18 +71,20 @@ function Add(rest) {
         initialValues={{
           title: '',
           overview: '',
-          posterPath: '',
+          poster_path: '',
           popularity: '',
-          releaseDate: '',
+          release_date: '',
           genres: '',
-          voteAverage: '',
-          voteCount: '',
+          vote_average: '',
+          vote_сount: '',
           adult: '',
         }}
         validateOnBlur
         onSubmit={(formData) => {
-          // eslint-disable-next-line no-console
-          console.log(formData);
+          const dataForm = { ...formData };
+          dataForm.id = nanoid(6);
+          storage.addMovie(dataForm);
+          dispatch(addMovie(dataForm));
         }}
         validationSchema={AddSchema}
       >
@@ -93,8 +99,11 @@ function Add(rest) {
           dirty,
           resetForm,
         }) => (
-          <form className="add-movie-form" method="POST" action="#" onSubmit={handleSubmit}>
-
+          <form
+            className="add-movie-form"
+            method="POST"
+            action="#"
+            onSubmit={handleSubmit}>
             <div>
               <label htmlFor="title">Title:</label>
               <div className="add-movie-form__box-input">
@@ -142,15 +151,15 @@ function Add(rest) {
                   className="add-movie-form__input"
                   type="text"
                   id="posterPath"
-                  name="posterPath"
+                  name="poster_path"
                   placeholder="poster-path"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.posterPath}
+                  value={values.poster_path}
                 />
-                {touched.posterPath && errors.posterPath && (
+                {touched.poster_path && errors.poster_path && (
                   <span className="sign-up-form__validation-mess">
-                    {errors.posterPath}
+                    {errors.poster_path}
                   </span>)}
               </div>
             </div>
@@ -182,7 +191,7 @@ function Add(rest) {
                   className="add-movie-form__input"
                   type="date"
                   id="releaseDate"
-                  name="releaseDate"
+                  name="release_date"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.releaseDate}
@@ -222,7 +231,7 @@ function Add(rest) {
                   className="add-movie-form__input"
                   type="number"
                   id="voteAverage"
-                  name="voteAverage"
+                  name="vote_average"
                   placeholder="vote-average"
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -242,7 +251,7 @@ function Add(rest) {
                   className="add-movie-form__input"
                   type="number"
                   id="voteCount"
-                  name="voteCount"
+                  name="vote_сount"
                   placeholder="vote-count"
                   onChange={handleChange}
                   onBlur={handleBlur}

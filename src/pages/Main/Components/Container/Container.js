@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './container.scss';
-// import * as storage from '../../../../localStorage/storage';
 import { loadMovies } from '../../../../store/reducers/moviesReducer';
 import Movie from '../Movie/Movie';
 import Loader from '../Loader/Loader';
@@ -28,7 +27,7 @@ function Container({ isAuth, currentUser }) {
   return (
     <div className="container">
       <Loader />
-      {movies.results?.filter((movie) => !removedMovies.includes(String(movie.id))).map((item) => (
+      {movies?.filter((movie) => !removedMovies.includes(String(movie.id))).map((item) => (
         <Movie
           key={item.id}
           {...item}

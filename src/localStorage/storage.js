@@ -54,7 +54,7 @@ export function getVotedMovies() {
   return JSON.parse(voted);
 }
 
-// for remove movie
+// for remove movies
 export function addIdRemoveMovie(id) {
   const idRemoveMovies = getIdRemoveMovies();
   const isRemoveMovies = idRemoveMovies || [];
@@ -65,4 +65,18 @@ export function addIdRemoveMovie(id) {
 export function getIdRemoveMovies() {
   const deletedMovies = sessionStorage.getItem('deletedMovies');
   return JSON.parse(deletedMovies);
+}
+
+// for added movies
+
+export function addMovie(formData) {
+  const addedMovies = getAddedMovies();
+  const isAddedMovies = addedMovies || [];
+  isAddedMovies.unshift(formData);
+  sessionStorage.setItem('addedMovies', JSON.stringify(isAddedMovies));
+}
+
+export function getAddedMovies() {
+  const addedMovies = sessionStorage.getItem('addedMovies');
+  return JSON.parse(addedMovies);
 }

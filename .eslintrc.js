@@ -39,7 +39,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
-    camelcase: ['error', { ignoreDestructuring: true }],
+    camelcase: 'off',
     'no-debugger': 'off',
     'no-unused-expressions': ['error', { allowShortCircuit: false }],
   },

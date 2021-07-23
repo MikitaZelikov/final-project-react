@@ -10,9 +10,9 @@ function Movie(props) {
   const dispatch = useDispatch();
 
   const {
-    poster_path: posterPath,
-    release_date: releaseDate,
-    vote_average: voteAverage,
+    poster_path,
+    release_date,
+    vote_average,
     title,
     id,
     isAuth,
@@ -20,7 +20,7 @@ function Movie(props) {
   } = props;
 
   let urlPosterMovie = logoMovie;
-  if (posterPath) urlPosterMovie = `http://image.tmdb.org/t/p/w342${posterPath}`;
+  if (poster_path) urlPosterMovie = `http://image.tmdb.org/t/p/w342${poster_path}`;
 
   const handleRemove = () => {
     storage.addIdRemoveMovie(String(id));
@@ -36,10 +36,10 @@ function Movie(props) {
           alt="постер фильма" />
       </Link>
       <p className="container-element__text container-element__text--hover">
-        Рейтинг: <strong>{voteAverage}</strong>
+        Рейтинг: <strong>{vote_average}</strong>
       </p>
       <p className="container-element__text container-element__text--hover">
-        Премьера: <strong>{releaseDate}</strong>
+        Премьера: <strong>{release_date}</strong>
       </p>
       {isAuth && currentUser.role === 'admin'
         && <Link to="/" className="container-element__remove-link" onClick={handleRemove}>
